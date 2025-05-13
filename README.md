@@ -32,6 +32,22 @@ Habit Tracker — это Django-приложение для отслеживан
 
 Склонируйте репозиторий с GitHub:
 
-```bash
+```
 git clone https://github.com/buzindmitriy/habit_tracker
 cd habit-tracker
+```
+## Настройка удаленного сервера
+
+1. Установите необходимые пакеты: Python, Docker, Nginx.
+2. Настройте SSH-ключи и брандмауэр.
+3. Настройте Gunicorn и Nginx для работы с приложением.
+
+## GitHub Actions Workflow
+
+1. Добавьте файл `.github/workflows/deploy.yml`.
+2. Настройте Secrets в GitHub для доступа к Docker Hub и серверу.
+
+## Деплой приложения
+
+1. После успешного прохождения тестов проект автоматически деплоится на сервер.
+2. Приложение доступно по IP-адресу или домену.
