@@ -1,19 +1,25 @@
-# Базовый образ
-FROM python:3.11-slim
+# Стадия 1: Установка зависимостей
+FROM python:3.11-slim AS builder
 
-# Установка рабочей директории
 WORKDIR /app
 
-# Установка Poetry и зависимостей
+# Установка Poetry
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 RUN curl -sSL https://install.python-poetry.org  | python3 -
 ENV PATH="${PATH}:/root/.local/bin"
 
+# Копирование файлов Poetry
 COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false && \
     poetry install --no-root --no-dev
 
-# Копирование остальных файлов
+# Стадия 2: Финальный образ
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Копирование зависимостей из первой стадии
+COPY --from=builder /app /app
 COPY . .
 
 # Сборка статики и миграции
