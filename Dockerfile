@@ -1,5 +1,5 @@
 # Базовый образ
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Установка рабочей директории
 WORKDIR /app
@@ -13,6 +13,9 @@ ENV PATH="${PATH}:/root/.local/bin"
 
 # Проверка установки Poetry
 RUN poetry --version
+
+# Явное использование Python 3.12
+RUN poetry env use python3.12
 
 # Копирование файлов Poetry
 COPY pyproject.toml poetry.lock ./
