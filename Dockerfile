@@ -4,12 +4,20 @@ FROM python:3.11-slim
 # Установка рабочей директории
 WORKDIR /app
 
-# Установка Poetry и зависимостей
+# Установка необходимых пакетов
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Установка Poetry
 RUN curl -sSL https://install.python-poetry.org  | python3 -
 ENV PATH="${PATH}:/root/.local/bin"
 
+# Проверка установки Poetry
+RUN poetry --version
+
+# Копирование файлов Poetry
 COPY pyproject.toml poetry.lock ./
+
+# Установка зависимостей
 RUN poetry config virtualenvs.create false && \
     poetry install --no-root --no-dev
 
