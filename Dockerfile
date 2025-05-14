@@ -11,15 +11,14 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 RUN curl -sSL https://install.python-poetry.org  | python3 -
 ENV PATH="${PATH}:/root/.local/bin"
 
-# Проверка установки Poetry
-RUN poetry --version
+# Создание директории для кэша Poetry
+RUN mkdir -p /root/.cache/pypoetry && chmod -R 755 /root/.cache/pypoetry
 
 # Копирование файлов Poetry
 COPY pyproject.toml poetry.lock ./
 
 # Настройка Poetry
 RUN poetry config virtualenvs.create false && \
-    poetry env use python3.12 && \
     poetry install --no-root --no-dev
 
 # Копирование остальных файлов
