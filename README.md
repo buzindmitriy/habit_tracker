@@ -33,7 +33,7 @@ Habit Tracker — это Django-приложение для отслеживан
 2. Скопируйте `.env.example` в `.env` и настройте переменные окружения.
 3. Запустите проект:
    ```bash
-   docker-compose up --build
+   sudo docker-compose up --build
 ### 1. Клонирование репозитория
 
 Склонируйте репозиторий с GitHub:
@@ -50,7 +50,7 @@ cd habit-tracker
 
 ## GitHub Actions Workflow
 
-1. Добавьте файл `.github/workflows/deploy.yml`.
+1. Добавьте файл `.github/workflows/ci-cd.yml`.
 2. Настройте Secrets в GitHub для доступа к Docker Hub и серверу.
 
 ## Деплой приложения
