@@ -14,14 +14,12 @@ ENV PATH="${PATH}:/root/.local/bin"
 # Проверка установки Poetry
 RUN poetry --version
 
-# Явное использование Python 3.12
-RUN poetry env use python3.12
-
 # Копирование файлов Poetry
 COPY pyproject.toml poetry.lock ./
 
-# Установка зависимостей
+# Настройка Poetry
 RUN poetry config virtualenvs.create false && \
+    poetry env use python3.12 && \
     poetry install --no-root --no-dev
 
 # Копирование остальных файлов
